@@ -3,9 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import iconeshort from '../../assets/img/iconeshort.svg';
 import { Sale } from "../../models/sale";
 import { BASE_URL } from "../../utils/request";
+import NotificationButton from "../NotificationButton";
 import './style.css';
 function SalesCard() {
 
@@ -21,7 +21,7 @@ function SalesCard() {
     useEffect(() => {
         const dmin = minDate.toISOString().slice(0, 10);
         const dmax = maxDate.toISOString().slice(0, 10);
-        console.log(dmin);
+        
 
         axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
             .then(response => {
@@ -29,7 +29,7 @@ function SalesCard() {
 
             });
 
-    }, [minDate,maxDate]);
+    }, [minDate, maxDate]);
 
     return (
 
@@ -79,9 +79,9 @@ function SalesCard() {
                                     <td>R${sale.amount.toFixed(2)}</td>
                                     <td>
                                         < div className="dsmeta-red-btn-container">
-                                            <div className="dsmeta-red-btn">
-                                                <img src={iconeshort} alt="Notificar" />
-                                            </div>
+
+                                            <NotificationButton saleId={sale.id} />
+
                                         </div>
                                     </td>
                                 </tr>
