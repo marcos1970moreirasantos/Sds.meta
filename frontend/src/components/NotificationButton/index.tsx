@@ -1,27 +1,28 @@
+import axios from 'axios';
 import iconeshort from '../../assets/img/iconeshort.svg';
 import './style.css';
-function NotificationButton() {
+
+type Props = {
+    saleId: number;
+}
+
+function handleClick(id: number) {
+    axios(`${BASE_URL}/sales/${id}/notification`)
+        .then(response => {
+            console.log("SUCESSO");
+        });
+
+}
+
+function NotificationButton({ saleId }: Props) {
     return (
-        <>
-            <div className=" dsmeta-logo-container">
-                <img src={iconeshort} alt="DSMeta" />
-                <h1> DSMeta </h1>
-                <p>
-                    Desenvolvido por
-                    <a href=" https://www.instagram.com/devsuperior.ig">@devsuperior.ig </ a >
-                </p>
-            </div>
+        <div className="dsmeta-red-btn" onClick={() => handleClick(saleId)}>
+            <img src={iconeshort} alt="Motificar" />
 
-            <div className="dsmeta-red-btn">
-                <img src={iconeshort} alt="Notificar" />
-            </div>
-
-            <div className="dsmeta-red-btn">
-                <img src={iconeshort} alt="Notificar" />
-            </div>
-        </>
-    )
+        </div>
 
 }
 
 export default NotificationButton;
+
+
